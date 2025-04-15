@@ -1,0 +1,2 @@
+To read message send by spring boot application
+ > C:\Users\prajane\kafka> .\bin\windows\kafka-console-consumer.bat --topic spring-boot-demo --from-beginning --bootstrap-server localhost:9092
