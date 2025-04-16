@@ -1,4 +1,4 @@
-# Kafak Spring Boot Application
+# Springboot Kafka Application
 
 A POC application to demonstrate how kafka can be integrate with spring boot framework, using spring boot kafka provided libraries.
 
