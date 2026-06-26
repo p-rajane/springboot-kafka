@@ -1,31 +1,28 @@
 package com.kafka.tutorial.controller;
 
+import com.kafka.tutorial.dto.User;
+import com.kafka.tutorial.service.ErrorProducer;
+import com.kafka.tutorial.service.jsonserializer.JsonMessageProducer;
+import com.kafka.tutorial.service.stringserializer.StringMessageProducer;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.kafka.tutorial.impl.jsonserializer.JsonMessageProducer;
-import com.kafka.tutorial.impl.jsonserializer.User;
-import com.kafka.tutorial.impl.stringserializer.StringMessageProducer;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
 public class Controller {
 
-	private StringMessageProducer stringMessageProducer;
-	private JsonMessageProducer jsonMessageProducer;
-	
-	public Controller(StringMessageProducer messageProducer, JsonMessageProducer jsonMessageProducer) {
+	private final StringMessageProducer stringMessageProducer;
+	private final JsonMessageProducer jsonMessageProducer;
+    private final ErrorProducer errorProducer;
+
+	public Controller(StringMessageProducer messageProducer, JsonMessageProducer jsonMessageProducer, ErrorProducer errorProducer) {
 		this.stringMessageProducer = messageProducer;
 		this.jsonMessageProducer = jsonMessageProducer;
-	}
+        this.errorProducer = errorProducer;
+    }
 	
 	//localhost:8080/api/publishString?message=Hi Pramod, welcome to Spring Boot application.
 	@GetMapping("/publishString")
